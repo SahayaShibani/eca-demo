@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>ECA Demo</title></head>
+<body>
+<h3>Tickets from Salesforce</h3>
+<ul id="list"><li>Waiting for data…</li></ul>
+<script>
+window.addEventListener('message', (e) => {
+    if (!/\.lightning\.force\.com$/.test(new URL(e.origin).hostname)) return;
+    const data = JSON.parse(e.data);
+    const list = document.getElementById('list');
+    list.innerHTML = '';
+    data.records.forEach(r => {
+        const li = document.createElement('li');
+        li.textContent = r.Name;
+        list.appendChild(li);
+    });
+});
+</script>
+</body></html>
